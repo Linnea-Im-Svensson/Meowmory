@@ -113,11 +113,13 @@ function createCards(pairs){
         arr1.push(randomNr);
         card.style.background = `url('img/${randomNr}.jpg') no-repeat center center/cover`;
         card.classList.add(randomNr);
+        card.setAttribute('id', 'pairId-1');
         done = true
       } else if (!arr2.includes(randomNr)){
           arr2.push(randomNr);
           card.style.background = `url('img/${randomNr}.jpg') no-repeat center center/cover`;
           card.classList.add(randomNr);
+          card.setAttribute('id', 'pairId-2');
           done = true
       }
     } while (done === false);
@@ -127,12 +129,15 @@ function createCards(pairs){
 //Adds the flip-animation and checks pairs and wincondition
 function flip() {
 const cardBacks = document.querySelectorAll('.back');
+
 let flipped = 0,
     totalCards = 0,
     prevCardValue,
     prevCard,
     thisCardValue,
-    winCondition = pairs * 2;
+    winCondition = pairs * 2,
+    pairId1,
+    pairId2;
 
     cardBacks.forEach((card) => {
         card.addEventListener('click', () => {
@@ -142,14 +147,17 @@ let flipped = 0,
             flipped++;
             prevCardValue = card.previousElementSibling.classList.value;
             prevCard = card;
+            pairId1 = card.previousElementSibling.getAttribute('id');
+            console.log(pairId1);
           } else if (flipped < 2){ //Stores value of second card
             animation(card);
             flipped++;
             thisCardValue = card.previousElementSibling.classList.value;
-            console.log(thisCardValue);
+            pairId2 = card.previousElementSibling.getAttribute('id');
+            console.log(pairId2);
             // After a delay for the animation, checks pair
             setTimeout(() => {
-              if (prevCardValue == thisCardValue){
+              if (prevCardValue == thisCardValue && pairId1 != pairId2){
                 flipped = 0;
                 totalCards += 2;
                 // Finally checks to see if all cards have been matched
