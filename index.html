@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Meowmory</title>
+</head>
+<body>
+  <button class="back-to-menu hide">Go Back</button>
+  <div class="menu">
+    <img src="img/menu.jpg">
+    <h1>Meowmory</h1>
+    <div class="difficulty">
+      <h3>Select difficulty:</h3>
+      <div class="lvl easy">Easy</div>
+      <div class="lvl medium">Medium</div>
+      <div class="lvl hard">Hard</div>
+    </div>
+    <div class="checkbox-container">
+      <label for="time" id="no-btn">No Timer</label>
+      <input type="radio" name="time" id="time-option-yes">
+      <input type="radio" name="time" id="time-option-no" checked>
+      <label for="time" id="yes-btn">Timer</label>
+    </div>
+  </div>
+  <div class="time-container hide">
+    <h1 id="timer"></h1>
+  </div>
+  <div class="game-container hide"></div>
+  <div class="result-container hide">
+    <h1 id="result"></h1>
+    <button id="play-again">Play Again</button>
+  </div>
+  <footer><a href="https://www.freepik.com/author/catalyststuff" target="_blank"> Images by catalyststuff on Freepik</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>
