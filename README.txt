@@ -1,4 +1,5 @@
 School Project for ChasAcademy
+Created by Linnéa Svensson.
 
 A classic Memory game with a cute twist.
 

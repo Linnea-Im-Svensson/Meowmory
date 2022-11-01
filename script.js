@@ -2,14 +2,14 @@ const menu = document.querySelector('.menu'),
       gameContainer = document.querySelector('.game-container'),
       lvlBtns = document.querySelectorAll('.lvl'),
       resultContainer = document.querySelector('.result-container'),
-      result = document.getElementById('result'),
-      playAgain = document.getElementById('play-again'),
+      result = document.querySelector('#result'),
+      playAgain = document.querySelector('#play-again'),
       timeContainer = document.querySelector('.time-container'),
-      timeLeft = document.getElementById('timer'),
-      timeOptionYes = document.getElementById('time-option-yes'),
-      timeOptionNo = document.getElementById('time-option-no'),
-      yesBtn = document.getElementById('yes-btn'),
-      noBtn = document.getElementById('no-btn'),
+      timeLeft = document.querySelector('#timer'),
+      timeOptionYes = document.querySelector('#time-option-yes'),
+      timeOptionNo = document.querySelector('#time-option-no'),
+      yesBtn = document.querySelector('#yes-btn'),
+      noBtn = document.querySelector('#no-btn'),
       backBtn = document.querySelector('.back-to-menu');
 
 let arr1 = [],
@@ -175,7 +175,7 @@ let flipped = 0,
                 prevCard.previousElementSibling.style.animation = '';
                 flipped = 0;
               }
-            }, 1000);
+            }, 1500);
           }
         })
     })
