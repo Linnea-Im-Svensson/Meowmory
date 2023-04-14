@@ -11,6 +11,7 @@ body {
   flex-direction: column;
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  background: url('/img/back.jpg') no-repeat center center/cover;
 }
 
 .back-to-menu {
@@ -19,7 +20,7 @@ body {
   top: 0.5rem;
   left: 0.5rem;
   border: #000072 solid 4px;
-  background: #E791FE;
+  background: #e791fe;
   color: #000072;
   padding: 0.5rem 1rem;
   border-radius: 15px;
@@ -28,14 +29,14 @@ body {
 }
 
 .back-to-menu:hover {
-  border-color: #BF46A6;
-  background: #FB62BB;
+  border-color: #bf46a6;
+  background: #fb62bb;
 }
 
 .menu {
   height: 30rem;
   width: 25rem;
-  background: #FFF49E;
+  background: #fff49e;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -72,7 +73,7 @@ img {
 
 .easy,
 .medium,
-.hard{
+.hard {
   margin-bottom: 1rem;
   height: 2rem;
   display: flex;
@@ -81,21 +82,21 @@ img {
   border-radius: 10px;
   cursor: pointer;
   border: #000072 solid 4px;
-  background: #FFB532;
+  background: #ffb532;
   color: #000072;
 }
 
 .easy:hover,
 .medium:hover,
 .hard:hover {
-  border-color: #BF46A6;
-  background: #FB62BB;
+  border-color: #bf46a6;
+  background: #fb62bb;
   color: #000072;
 }
 
 .game-container {
   position: relative;
-  background: #E791FE;
+  background: #e791fe;
   border-radius: 20px;
   display: grid;
   gap: 0.5rem;
@@ -126,8 +127,8 @@ img {
   cursor: pointer;
   color: #fff;
   font-size: 1.5rem;
-  border: #B162A9 solid 6px;
-  background: #FF8DC1;
+  border: #b162a9 solid 6px;
+  background: #ff8dc1;
 }
 
 #play-again:hover {
@@ -214,14 +215,14 @@ label {
   padding: 0.3rem;
   border-radius: 10px;
   border: #000072 solid 4px;
-  background: #FFB532;
+  background: #ffb532;
   color: #000072;
   opacity: 0.9;
 }
 
 label:hover {
-  border-color: #BF46A6;
-  background: #FB62BB;
+  border-color: #bf46a6;
+  background: #fb62bb;
   cursor: pointer;
 }
 
@@ -241,7 +242,7 @@ input {
   width: 1.8rem;
   display: block;
   border-radius: 20px;
-  border: #FFB532 solid 10.5px;
+  border: #ffb532 solid 10.5px;
   background: #000072;
 }
 

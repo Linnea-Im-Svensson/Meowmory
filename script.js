@@ -1,21 +1,21 @@
 const menu = document.querySelector('.menu'),
-      gameContainer = document.querySelector('.game-container'),
-      lvlBtns = document.querySelectorAll('.lvl'),
-      resultContainer = document.querySelector('.result-container'),
-      result = document.querySelector('#result'),
-      playAgain = document.querySelector('#play-again'),
-      timeContainer = document.querySelector('.time-container'),
-      timeLeft = document.querySelector('#timer'),
-      timeOptionYes = document.querySelector('#time-option-yes'),
-      timeOptionNo = document.querySelector('#time-option-no'),
-      yesBtn = document.querySelector('#yes-btn'),
-      noBtn = document.querySelector('#no-btn'),
-      backBtn = document.querySelector('.back-to-menu');
+  gameContainer = document.querySelector('.game-container'),
+  lvlBtns = document.querySelectorAll('.lvl'),
+  resultContainer = document.querySelector('.result-container'),
+  result = document.querySelector('#result'),
+  playAgain = document.querySelector('#play-again'),
+  timeContainer = document.querySelector('.time-container'),
+  timeLeft = document.querySelector('#timer'),
+  timeOptionYes = document.querySelector('#time-option-yes'),
+  timeOptionNo = document.querySelector('#time-option-no'),
+  yesBtn = document.querySelector('#yes-btn'),
+  noBtn = document.querySelector('#no-btn'),
+  backBtn = document.querySelector('.back-to-menu');
 
 let arr1 = [],
-    arr2 = [],
-    pairs = 0,
-    time = 0;
+  arr2 = [],
+  pairs = 0,
+  time = 0;
 
 let imgAmount = 0; //decides how many different pictures can be generated
 
@@ -23,21 +23,20 @@ backBtn.addEventListener('click', () => {
   toggle(backBtn);
   toggle(gameContainer);
   reset();
-})
-
+});
 
 //Choose if timer should be on
 yesBtn.addEventListener('click', () => {
   timeOptionYes.checked = true;
-})
+});
 noBtn.addEventListener('click', () => {
   timeOptionNo.checked = true;
-})
+});
 
 // Play again
 playAgain.addEventListener('click', () => {
   reset();
-})
+});
 
 function reset() {
   toggle(menu);
@@ -54,24 +53,24 @@ function reset() {
 }
 
 // Select difficulty
-lvlBtns.forEach(btn => {
+lvlBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    if (btn.classList.contains('easy')){
+    if (btn.classList.contains('easy')) {
       createBoard(2);
       pairs = 2;
-      if (timeOptionYes.checked == true){
+      if (timeOptionYes.checked == true) {
         activateTimer(10);
       }
     } else if (btn.classList.contains('medium')) {
       createBoard(4);
       pairs = 8;
-      if (timeOptionYes.checked == true){
+      if (timeOptionYes.checked == true) {
         activateTimer(45);
       }
     } else {
       createBoard(6);
       pairs = 18;
-      if (timeOptionYes.checked == true){
+      if (timeOptionYes.checked == true) {
         activateTimer(120);
       }
     }
@@ -80,8 +79,8 @@ lvlBtns.forEach(btn => {
     toggle(backBtn);
     createCards(pairs);
     flip();
-  })
-})
+  });
+});
 
 //generates a game board depending on difficulty chosen
 function createBoard(nr) {
@@ -91,10 +90,10 @@ function createBoard(nr) {
 }
 
 //Creates the amount of cards needed for the difficulty and sets their background
-function createCards(pairs){
+function createCards(pairs) {
   let amountOfCards = imgAmount * imgAmount;
   //Creates the cards as long as there are empty spots to fill
-  while(!amountOfCards == 0) {
+  while (!amountOfCards == 0) {
     const card = document.createElement('div');
     card.classList.add('card-container');
     card.innerHTML = `<div class="card front"></div>
@@ -108,29 +107,29 @@ function createCards(pairs){
   cardFronts.forEach((card) => {
     let done = false;
     do {
-      const randomNr = Math.floor(Math.random() * pairs) +1;
-      if (!arr1.includes(randomNr)){
+      const randomNr = Math.floor(Math.random() * pairs) + 1;
+      if (!arr1.includes(randomNr)) {
         arr1.push(randomNr);
         card.style.background = `url('img/${randomNr}.jpg') no-repeat center center/cover`;
         card.classList.add(randomNr);
         card.setAttribute('id', 'pairId-1');
-        done = true
-      } else if (!arr2.includes(randomNr)){
-          arr2.push(randomNr);
-          card.style.background = `url('img/${randomNr}.jpg') no-repeat center center/cover`;
-          card.classList.add(randomNr);
-          card.setAttribute('id', 'pairId-2');
-          done = true
+        done = true;
+      } else if (!arr2.includes(randomNr)) {
+        arr2.push(randomNr);
+        card.style.background = `url('img/${randomNr}.jpg') no-repeat center center/cover`;
+        card.classList.add(randomNr);
+        card.setAttribute('id', 'pairId-2');
+        done = true;
       }
     } while (done === false);
-  })
+  });
 }
 
 //Adds the flip-animation and checks pairs and wincondition
 function flip() {
-const cardBacks = document.querySelectorAll('.back');
+  const cardBacks = document.querySelectorAll('.back');
 
-let flipped = 0,
+  let flipped = 0,
     totalCards = 0,
     prevCardValue,
     prevCard,
@@ -139,56 +138,62 @@ let flipped = 0,
     pairId1,
     pairId2;
 
-    cardBacks.forEach((card) => {
-        card.addEventListener('click', () => {
-          // Stores value of first card flipped
-          if (flipped < 1) {
-            animation(card);
-            flipped++;
-            prevCardValue = card.previousElementSibling.classList.value;
-            prevCard = card;
-            pairId1 = card.previousElementSibling.getAttribute('id');
-            console.log(pairId1);
-          } else if (flipped < 2){ //Stores value of second card
-            animation(card);
-            flipped++;
-            thisCardValue = card.previousElementSibling.classList.value;
-            pairId2 = card.previousElementSibling.getAttribute('id');
-            console.log(pairId2);
-            // After a delay for the animation, checks pair
-            setTimeout(() => {
-              if (prevCardValue == thisCardValue && pairId1 != pairId2){
-                flipped = 0;
-                totalCards += 2;
-                // Finally checks to see if all cards have been matched
-                if (totalCards == winCondition) {
-                  result.innerText = 'You Won!';
-                  toggle(gameContainer);
-                  resultContainer.classList.add('win');
-                  toggle(resultContainer);
-                  toggle(backBtn);
-                }
-              } else { //reverses the animation if not a pair
-                card.style.animation = '';
-                card.previousElementSibling.style.animation = '';
-                prevCard.style.animation = '';
-                prevCard.previousElementSibling.style.animation = '';
-                flipped = 0;
-              }
-            }, 1500);
+  cardBacks.forEach((card) => {
+    card.addEventListener('click', () => {
+      // Stores value of first card flipped
+      if (flipped < 1) {
+        animation(card);
+        flipped++;
+        prevCardValue = card.previousElementSibling.classList.value;
+        prevCard = card;
+        pairId1 = card.previousElementSibling.getAttribute('id');
+        console.log(pairId1);
+      } else if (flipped < 2) {
+        //Stores value of second card
+        animation(card);
+        flipped++;
+        thisCardValue = card.previousElementSibling.classList.value;
+        pairId2 = card.previousElementSibling.getAttribute('id');
+        console.log(pairId2);
+        // After a delay for the animation, checks pair
+        setTimeout(() => {
+          if (prevCardValue == thisCardValue && pairId1 != pairId2) {
+            flipped = 0;
+            totalCards += 2;
+            // Finally checks to see if all cards have been matched
+            if (totalCards == winCondition) {
+              result.innerText = 'You Won!';
+              toggle(gameContainer);
+              resultContainer.classList.add('win');
+              toggle(resultContainer);
+              toggle(backBtn);
+            }
+          } else {
+            //reverses the animation if not a pair
+            card.style.animation = '';
+            card.previousElementSibling.style.animation = '';
+            prevCard.style.animation = '';
+            prevCard.previousElementSibling.style.animation = '';
+            flipped = 0;
           }
-        })
-    })
+        }, 1500);
+      }
+    });
+  });
 }
 
 function animation(card) {
   card.style.animation = 'backAnimation 0.8s ease forwards';
-  card.previousElementSibling.style.animation = 'frontAnimation 0.8s ease forwards';
+  card.previousElementSibling.style.animation =
+    'frontAnimation 0.8s ease forwards';
 }
 
 function timer(time) {
   intervalID = setInterval(() => {
-    if (time != 0 && resultContainer.classList.contains('win') || backBtn.classList.contains('hide')) {
+    if (
+      (time != 0 && resultContainer.classList.contains('win')) ||
+      backBtn.classList.contains('hide')
+    ) {
       clearInterval(intervalID);
       timeLeft.innerText = '';
       toggle(timeContainer);
@@ -217,4 +222,4 @@ function activateTimer(time) {
 
 function toggle(div) {
   div.classList.toggle('hide');
-};
+}
